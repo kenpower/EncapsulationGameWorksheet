@@ -53,6 +53,12 @@ public:
         std::cout << name << "take damage " << damage << "\n";
     }
 
+    std::string status() {
+        if (health <= 0) 
+            return name + " has been defeated.\n";
+        return "";
+    }
+
     int damage() {
         return currentWeapon ?
             currentWeapon->getDamage() * strength :
@@ -118,16 +124,10 @@ public:
         equipRandomWeapon(player);
         equipRandomWeapon(enemy);
 
+        std::cout << player.status();
+        std::cout << enemy.status();
 
-        
-        if (player.getHealth() <= 0) {
-            std::cout << player.getName() << " has been defeated.\n";
-            return 1;
-        }
-        else if (enemy.getHealth() <= 0) {
-            std::cout << enemy.getName() << " has been defeated.\n";
-            return 0;
-        }
+        return 0;
     }
 
     void equipPlayerWeapon(int weaponIndex) {
